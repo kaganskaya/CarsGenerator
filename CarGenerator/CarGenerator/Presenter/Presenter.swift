@@ -66,7 +66,7 @@ class Presenter {
     }
 func getCars(){
     
-   DispatchQueue.global(qos: .background).async {
+  DispatchQueue.global(qos: .background).async {
     
         self.locp.deleteData()
         self.fillBrands()
@@ -87,7 +87,9 @@ func getCars(){
         }).disposed(by: self.disposeBag)
     }
     
-    }}
+    }
+    
+}
         
  
     

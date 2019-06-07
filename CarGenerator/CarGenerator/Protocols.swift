@@ -8,7 +8,6 @@
 import Foundation
 
 protocol MainView: class {
-    //var presenter: MainPresenter! { get set }
     func showData(array:[Car])
 }
 

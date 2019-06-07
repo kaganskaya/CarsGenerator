@@ -61,6 +61,39 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6744E88322AAA815009137A2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				674A942322A98425009247A5 /* TableViewCell.swift */,
+				674A93F622A93395009247A5 /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6744E88422AAA828009137A2 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				674A942522A984DA009247A5 /* Presenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6744E88522AAA835009137A2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				674A942722A984E9009247A5 /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6744E88622AAA844009137A2 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				674A941122A93444009247A5 /* LocalProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
 		674A93E822A93395009247A5 = {
 			isa = PBXGroup;
 			children = (
@@ -82,17 +115,16 @@
 		674A93F322A93395009247A5 /* CarGenerator */ = {
 			isa = PBXGroup;
 			children = (
+				6744E88622AAA844009137A2 /* Providers */,
+				6744E88522AAA835009137A2 /* Model */,
+				6744E88422AAA828009137A2 /* Presenter */,
+				6744E88322AAA815009137A2 /* View */,
 				674A93F422A93395009247A5 /* AppDelegate.swift */,
-				674A93F622A93395009247A5 /* ViewController.swift */,
 				674A93F822A93395009247A5 /* Main.storyboard */,
 				674A93FE22A93396009247A5 /* Assets.xcassets */,
 				674A940022A93396009247A5 /* LaunchScreen.storyboard */,
 				674A940322A93396009247A5 /* Info.plist */,
 				674A93FB22A93395009247A5 /* CarGenerator.xcdatamodeld */,
-				674A941122A93444009247A5 /* LocalProvider.swift */,
-				674A942322A98425009247A5 /* TableViewCell.swift */,
-				674A942522A984DA009247A5 /* Presenter.swift */,
-				674A942722A984E9009247A5 /* Model.swift */,
 				67A379C922A9880A00E0FDF6 /* Protocols.swift */,
 			);
 			path = CarGenerator;

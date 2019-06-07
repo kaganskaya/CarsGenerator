@@ -15,6 +15,9 @@ class LocalProvider{
     
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     lazy var managedContext = appDelegate!.persistentContainer.viewContext
+    let con = NSPersistentContainer(name: "CarGenerator")
+    
+    
     
     func fillBrands(brand:String) {
         do {
@@ -38,23 +41,44 @@ class LocalProvider{
     func getCars()->Observable<[Car]>{
         
        return Observable<[Car]>.create { observer -> Disposable in
+       
+        let fetchRequest =  NSFetchRequest<NSFetchRequestResult>(entityName: "Car")
         
-            let fetchRequest =  NSFetchRequest<NSFetchRequestResult>(entityName: "Car")
             fetchRequest.predicate = NSPredicate(format: "color == %@", "red")
-            
+       
+        let backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+       
+            backgroundContext.parent = self.managedContext
+                
+        var ids:[NSManagedObjectID] = []
+        
+        backgroundContext.perform{
+        
             do {
                 
-                let res = try self.managedContext.fetch(fetchRequest) as! [Car]
-               
-                observer.onNext(res)
-                observer.onCompleted()
+              let res = try backgroundContext.fetch(fetchRequest) as! [Car]
                 
-            } catch {
-                fatalError("Failure to save context: \(error)")
-            }
-    
-        
+                
+                let objects  = backgroundContext.registeredObjects
+                
+                   _ = objects.map({ i in
+                        ids.append(i.objectID)
+                    })
+                
+                 let changes = [NSUpdatedObjectsKey: ids]
+                
+                    observer.onNext(res)
+                    observer.onCompleted()
+               
+                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self.managedContext])
 
+            }catch{}
+            
+          
+ 
+        }
+        
+       
         return Disposables.create(with: {})
         
         }
