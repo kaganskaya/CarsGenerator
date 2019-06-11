@@ -55,22 +55,23 @@ class Presenter {
         return res!
     }
     
-    func fillCars(){
+    func fillCars(amount:Int){
         
-             for _ in 0..<100 {
-                locp.fillCar(car: self.generateCar(), brand: getRandomBrand())
-                //print(index)
+             for _ in 0..<amount {
+                locp.fillCar(car: self.generateCar())
+              //  print(index)
             }
         
         
     }
-func getCars(){
+    func getCars(amount:Int){
     
   DispatchQueue.global(qos: .background).async {
     
         self.locp.deleteData()
         self.fillBrands()
-        self.fillCars()
+        self.fillCars(amount: amount)
+    
     DispatchQueue.main.async {
         self.locp.getCars().subscribe(
             
@@ -97,7 +98,7 @@ func getCars(){
     
     func generateCar() -> MyCar{
         
-        let car:MyCar = MyCar(year: Int64.random(in: 2003..<2020), color: Colors.allCases.randomElement()!.rawValue, capacity: Double.random(in: 1..<9))
+        let car:MyCar = MyCar(year: Int64.random(in: 2003..<2020), color: Colors.allCases.randomElement()!.rawValue, capacity: Double.random(in: 1..<9), brand: self.getRandomBrand())
         return car
     }
     

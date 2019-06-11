@@ -12,6 +12,17 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activity: UIActivityIndicatorView!
+    @IBOutlet weak var number: UITextField!
+    
+    @IBAction func buttonGenerate(_ sender: Any) {
+        
+        activity.isHidden = false
+        activity.startAnimating()
+        
+        presenter.getCars(amount: Int(self.number.text! )!)
+        
+    }
+    
     
     let presenter = Presenter()
 
@@ -22,20 +33,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
       
         super.viewDidLoad()
-      
-        presenter.view = self
-        presenter.getCars()
         
+        presenter.view = self
+
         tableView.delegate = self
         tableView.dataSource = self
-       
-        print(cars.count)
-       
-        if self.cars.isEmpty {
-        tableView.isHidden = true
-            activity.startAnimating()
-        }
         
+        activity.isHidden = true
         
     }
 
@@ -51,7 +55,6 @@ extension ViewController: MainView, UITableViewDelegate, UITableViewDataSource {
             self.cars = array
         
             if  array.isEmpty == false {
-                self.tableView.isHidden = false
                 self.activity.stopAnimating()
                 self.activity.isHidden = true
             }
@@ -71,6 +74,7 @@ extension ViewController: MainView, UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath) as? TableViewCell
         
+            
             cell?.label.text = self.cars[indexPath.row].year.description
         
         return cell!

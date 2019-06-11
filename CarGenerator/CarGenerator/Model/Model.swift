@@ -11,4 +11,5 @@ struct MyCar {
     var year:Int64
     var color:String
     var capacity:Double
+    var brand:Brand
 }

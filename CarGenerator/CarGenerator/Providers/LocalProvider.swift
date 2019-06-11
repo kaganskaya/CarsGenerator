@@ -39,8 +39,8 @@ class LocalProvider{
     
     }
     func getCars()->Observable<[Car]>{
-        
-       return Observable<[Car]>.create { observer -> Disposable in
+
+        return Observable<[Car]>.create { observer -> Disposable in
        
         let fetchRequest =  NSFetchRequest<NSFetchRequestResult>(entityName: "Car")
         
@@ -144,7 +144,7 @@ class LocalProvider{
     }
     
     
-    func fillCar(car:MyCar,brand:Brand){
+    func fillCar(car:MyCar){
         
         
         do {
@@ -156,7 +156,7 @@ class LocalProvider{
                         entityItem.capacity = car.capacity
                         entityItem.color = car.color
                         entityItem.year  = car.year
-                        entityItem.hasBrand = brand
+                        entityItem.hasBrand = car.brand
                         
             
             do{
