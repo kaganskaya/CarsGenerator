@@ -66,13 +66,13 @@ class Presenter {
     }
     func getCars(amount:Int){
     
-  DispatchQueue.global(qos: .background).async {
+ // DispatchQueue.global(qos: .background).async {
     
         self.locp.deleteData()
         self.fillBrands()
         self.fillCars(amount: amount)
     
-    DispatchQueue.main.async {
+   // DispatchQueue.main.async {
         self.locp.getCars().subscribe(
             
             onNext: { n in
@@ -86,9 +86,9 @@ class Presenter {
         }, onDisposed: {
             //print("onDisposed")
         }).disposed(by: self.disposeBag)
-    }
+ //   }
     
-    }
+   // }
     
 }
         
